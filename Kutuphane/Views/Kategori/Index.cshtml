@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Kategori İşlemleri";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    table tbody tr td a {
+        width: 80px;
+    }
+
+    @@media screen and (max-width: 200px) {
+        .sidebar a {
+            text-align: center;
+            float: none;
+        }
+
+        .tablebutton {
+            display: none;
+            float: none;
+        }
+    }
+
+    .close {
+        font-size: 40px;
+    }
+</style>
+
+<div class="alert">
+    <a href="/Kategori/Insert" class="btn btn-primary">Yeni Kategori Ekle</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col" style="overflow-x: auto; text-align: center;">DEWEY KODU</th>
+            <th scope="col" style="width:50%; ">KATEGORİ ADI</th>
+            <th scope="col" style="width:20%; text-align:center;" class="tablebutton">KATEGORİ DÜZENLE</th>
+            <th scope="col" style="width:20%; text-align:center;" class="tablebutton">KATEGORİ SİL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row" style="text-align:center;">@item.DeweyId</th>
+                <td>@item.Isim</td>
+                <td style="text-align:center;" class="tablebutton"><a href="#" class="btn btn-success">Düzenle</a></td>
+                <td style="text-align:center;" class="tablebutton"><a href="#" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>

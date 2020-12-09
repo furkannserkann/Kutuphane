@@ -1,0 +1,74 @@
+﻿@model Kutuphane.Models.Entity.Kategori
+
+@{
+    ViewBag.Title = "Kategori Ekle";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h2>Kategori Ekle</h2>
+        <hr />
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Dewey Kodu</span>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.DeweyId, new { htmlAttributes = new { @class = "form-control", placeholder = "[0-9999]" } })
+                @Html.ValidationMessageFor(model => model.DeweyId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Kategori Adı</span>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Isim, new { htmlAttributes = new { @class = "form-control", placeholder = "Kategori Adı" } })
+                @Html.ValidationMessageFor(model => model.Isim, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <input type="button" id="insert" value="EKLE" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+
+    <hr />
+    <div>
+        <a href="/Kategori/Index" class="btn btn-primary">Kategori Listesi</a>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#insert').click(function () {
+                var id = $('#DeweyId').val();
+                var name = $('#Isim').val();
+                var lJson = { DeweyId: id, Isim: name };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Kategori/Insert",
+                    dataType: "json",
+                    data: lJson,
+                    success: function (data) {
+                        if (data.success == 0) {
+                            toastr.success(data.message, "", { extendedTimeOut: true, timeOut: 4000, progressBar: true, showMethod: 'slideDown', hideMethod: 'slideUp' });
+                            $('#DeweyId').val("");
+                            $('#Isim').val("");
+                        }
+                        else if (data.success == 1)
+                        {
+                            toastr.error(data.message, "", { extendedTimeOut: true, timeOut: 4000, progressBar: true, showMethod: 'slideDown', hideMethod: 'slideUp' });
+                        }
+                        else if (data.success == 2) {
+                            toastr.info(data.message, "", { extendedTimeOut: true, timeOut: 7000, progressBar: true, showMethod: 'slideDown', hideMethod: 'slideUp' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

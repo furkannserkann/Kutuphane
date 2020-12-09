@@ -1,0 +1,722 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbLibrarySomeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dil">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Isim" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EmanetKitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KitapId" Type="int" />
+          <Property Name="KullaniciId" Type="int" />
+          <Property Name="AldigiTarih" Type="datetime" />
+          <Property Name="VerecegiTarih" Type="date" />
+          <Property Name="VerdigiTarih" Type="date" />
+          <Property Name="Borcu" Type="money" />
+          <Property Name="HasarDurumu" Type="nvarchar(max)" />
+          <Property Name="TeslimDurumu" Type="bit" />
+          <Property Name="HasarYeri" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeweyId" Type="nvarchar(max)" />
+          <Property Name="Isim" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Kitap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ISBN" Type="nvarchar" MaxLength="20" />
+          <Property Name="Adi" Type="nvarchar(max)" />
+          <Property Name="YazarId" Type="int" />
+          <Property Name="Cevirmen" Type="nvarchar" MaxLength="125" />
+          <Property Name="YayinEviId" Type="int" />
+          <Property Name="Sayfa" Type="int" />
+          <Property Name="IlkBasimYili" Type="nvarchar" MaxLength="4" />
+          <Property Name="Ebat" Type="nvarchar" MaxLength="20" />
+          <Property Name="BasimSayisi" Type="nvarchar" MaxLength="10" />
+          <Property Name="DilId" Type="int" />
+          <Property Name="CiltTipi" Type="nvarchar" MaxLength="100" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="StokAdedi" Type="int" />
+          <Property Name="DeweyKod" Type="nvarchar(max)" />
+          <Property Name="YerNumarasi" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="KitapKategorileri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KitapId" Type="int" />
+          <Property Name="KategoriId" Type="int" />
+        </EntityType>
+        <EntityType Name="KitapYazarlari">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YazarId" Type="int" />
+          <Property Name="KitapId" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tc" Type="nvarchar" MaxLength="11" />
+          <Property Name="Adi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="DogumTarihi" Type="date" />
+          <Property Name="DogumYeri" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="25" />
+          <Property Name="UyelikTarihi" Type="date" />
+          <Property Name="Cinsiyet" Type="nvarchar" MaxLength="5" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Yetki" Type="int" />
+        </EntityType>
+        <EntityType Name="Yazar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Isim" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyisim" Type="nvarchar" MaxLength="50" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__EmanetKit__Kitap__398D8EEE">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
+          <End Role="EmanetKitaplar" Type="Self.EmanetKitaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmanetKitaplar">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmanetKit__Kulla__3A81B327">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="EmanetKitaplar" Type="Self.EmanetKitaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmanetKitaplar">
+              <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kitap__DilId__2A4B4B5E">
+          <End Role="Dil" Type="Self.Dil" Multiplicity="0..1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dil">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapKate__Kateg__2E1BDC42">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="KitapKategorileri" Type="Self.KitapKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapKategorileri">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapKate__Kitap__2D27B809">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
+          <End Role="KitapKategorileri" Type="Self.KitapKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapKategorileri">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapYaza__Kitap__31EC6D26">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
+          <End Role="KitapYazarlari" Type="Self.KitapYazarlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapYazarlari">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapYaza__Yazar__30F848ED">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="0..1" />
+          <End Role="KitapYazarlari" Type="Self.KitapYazarlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapYazarlari">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="dbLibrarySomeeModelStoreContainer">
+          <EntitySet Name="Dil" EntityType="Self.Dil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmanetKitaplar" EntityType="Self.EmanetKitaplar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kitap" EntityType="Self.Kitap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KitapKategorileri" EntityType="Self.KitapKategorileri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KitapYazarlari" EntityType="Self.KitapYazarlari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yazar" EntityType="Self.Yazar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EmanetKit__Kitap__398D8EEE" Association="Self.FK__EmanetKit__Kitap__398D8EEE">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="EmanetKitaplar" EntitySet="EmanetKitaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmanetKit__Kulla__3A81B327" Association="Self.FK__EmanetKit__Kulla__3A81B327">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EmanetKitaplar" EntitySet="EmanetKitaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kitap__DilId__2A4B4B5E" Association="Self.FK__Kitap__DilId__2A4B4B5E">
+            <End Role="Dil" EntitySet="Dil" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapKate__Kateg__2E1BDC42" Association="Self.FK__KitapKate__Kateg__2E1BDC42">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="KitapKategorileri" EntitySet="KitapKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapKate__Kitap__2D27B809" Association="Self.FK__KitapKate__Kitap__2D27B809">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="KitapKategorileri" EntitySet="KitapKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapYaza__Kitap__31EC6D26" Association="Self.FK__KitapYaza__Kitap__31EC6D26">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="KitapYazarlari" EntitySet="KitapYazarlari" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapYaza__Yazar__30F848ED" Association="Self.FK__KitapYaza__Yazar__30F848ED">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="KitapYazarlari" EntitySet="KitapYazarlari" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbLibrarySomeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dil">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK__Kitap__DilId__2A4B4B5E" FromRole="Dil" ToRole="Kitap" />
+        </EntityType>
+        <EntityType Name="EmanetKitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KitapId" Type="Int32" />
+          <Property Name="KullaniciId" Type="Int32" />
+          <Property Name="AldigiTarih" Type="DateTime" Precision="3" />
+          <Property Name="VerecegiTarih" Type="DateTime" Precision="0" />
+          <Property Name="VerdigiTarih" Type="DateTime" Precision="0" />
+          <Property Name="Borcu" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HasarDurumu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TeslimDurumu" Type="Boolean" />
+          <Property Name="HasarYeri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK__EmanetKit__Kitap__398D8EEE" FromRole="EmanetKitaplar" ToRole="Kitap" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__EmanetKit__Kulla__3A81B327" FromRole="EmanetKitaplar" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeweyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KitapKategorileri" Relationship="Self.FK__KitapKate__Kateg__2E1BDC42" FromRole="Kategori" ToRole="KitapKategorileri" />
+        </EntityType>
+        <EntityType Name="Kitap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ISBN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YazarId" Type="Int32" />
+          <Property Name="Cevirmen" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
+          <Property Name="YayinEviId" Type="Int32" />
+          <Property Name="Sayfa" Type="Int32" />
+          <Property Name="IlkBasimYili" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Ebat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BasimSayisi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DilId" Type="Int32" />
+          <Property Name="CiltTipi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokAdedi" Type="Int32" />
+          <Property Name="DeweyKod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YerNumarasi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dil" Relationship="Self.FK__Kitap__DilId__2A4B4B5E" FromRole="Kitap" ToRole="Dil" />
+          <NavigationProperty Name="EmanetKitaplar" Relationship="Self.FK__EmanetKit__Kitap__398D8EEE" FromRole="Kitap" ToRole="EmanetKitaplar" />
+          <NavigationProperty Name="KitapKategorileri" Relationship="Self.FK__KitapKate__Kitap__2D27B809" FromRole="Kitap" ToRole="KitapKategorileri" />
+          <NavigationProperty Name="KitapYazarlari" Relationship="Self.FK__KitapYaza__Kitap__31EC6D26" FromRole="Kitap" ToRole="KitapYazarlari" />
+        </EntityType>
+        <EntityType Name="KitapKategorileri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KitapId" Type="Int32" />
+          <Property Name="KategoriId" Type="Int32" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK__KitapKate__Kateg__2E1BDC42" FromRole="KitapKategorileri" ToRole="Kategori" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK__KitapKate__Kitap__2D27B809" FromRole="KitapKategorileri" ToRole="Kitap" />
+        </EntityType>
+        <EntityType Name="KitapYazarlari">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YazarId" Type="Int32" />
+          <Property Name="KitapId" Type="Int32" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK__KitapYaza__Kitap__31EC6D26" FromRole="KitapYazarlari" ToRole="Kitap" />
+          <NavigationProperty Name="Yazar" Relationship="Self.FK__KitapYaza__Yazar__30F848ED" FromRole="KitapYazarlari" ToRole="Yazar" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tc" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DogumTarihi" Type="DateTime" Precision="0" />
+          <Property Name="DogumYeri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="UyelikTarihi" Type="DateTime" Precision="0" />
+          <Property Name="Cinsiyet" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Yetki" Type="Int32" />
+          <NavigationProperty Name="EmanetKitaplar" Relationship="Self.FK__EmanetKit__Kulla__3A81B327" FromRole="Users" ToRole="EmanetKitaplar" />
+        </EntityType>
+        <EntityType Name="Yazar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Isim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KitapYazarlari" Relationship="Self.FK__KitapYaza__Yazar__30F848ED" FromRole="Yazar" ToRole="KitapYazarlari" />
+        </EntityType>
+        <Association Name="FK__Kitap__DilId__2A4B4B5E">
+          <End Role="Dil" Type="Self.Dil" Multiplicity="0..1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dil">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmanetKit__Kitap__398D8EEE">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
+          <End Role="EmanetKitaplar" Type="Self.EmanetKitaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmanetKitaplar">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmanetKit__Kulla__3A81B327">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="EmanetKitaplar" Type="Self.EmanetKitaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmanetKitaplar">
+              <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapKate__Kateg__2E1BDC42">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="KitapKategorileri" Type="Self.KitapKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapKategorileri">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapKate__Kitap__2D27B809">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
+          <End Role="KitapKategorileri" Type="Self.KitapKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapKategorileri">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapYaza__Kitap__31EC6D26">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
+          <End Role="KitapYazarlari" Type="Self.KitapYazarlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapYazarlari">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KitapYaza__Yazar__30F848ED">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="0..1" />
+          <End Role="KitapYazarlari" Type="Self.KitapYazarlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapYazarlari">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbLibrarySomeeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dil" EntityType="Self.Dil" />
+          <EntitySet Name="EmanetKitaplar" EntityType="Self.EmanetKitaplar" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Kitap" EntityType="Self.Kitap" />
+          <EntitySet Name="KitapKategorileri" EntityType="Self.KitapKategorileri" />
+          <EntitySet Name="KitapYazarlari" EntityType="Self.KitapYazarlari" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Yazar" EntityType="Self.Yazar" />
+          <AssociationSet Name="FK__Kitap__DilId__2A4B4B5E" Association="Self.FK__Kitap__DilId__2A4B4B5E">
+            <End Role="Dil" EntitySet="Dil" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmanetKit__Kitap__398D8EEE" Association="Self.FK__EmanetKit__Kitap__398D8EEE">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="EmanetKitaplar" EntitySet="EmanetKitaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmanetKit__Kulla__3A81B327" Association="Self.FK__EmanetKit__Kulla__3A81B327">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EmanetKitaplar" EntitySet="EmanetKitaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapKate__Kateg__2E1BDC42" Association="Self.FK__KitapKate__Kateg__2E1BDC42">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="KitapKategorileri" EntitySet="KitapKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapKate__Kitap__2D27B809" Association="Self.FK__KitapKate__Kitap__2D27B809">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="KitapKategorileri" EntitySet="KitapKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapYaza__Kitap__31EC6D26" Association="Self.FK__KitapYaza__Kitap__31EC6D26">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="KitapYazarlari" EntitySet="KitapYazarlari" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KitapYaza__Yazar__30F848ED" Association="Self.FK__KitapYaza__Yazar__30F848ED">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="KitapYazarlari" EntitySet="KitapYazarlari" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbLibrarySomeeModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbLibrarySomeeModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbLibrarySomeeModelStoreContainer" CdmEntityContainer="dbLibrarySomeeEntities">
+          <EntitySetMapping Name="Dil">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.Dil">
+              <MappingFragment StoreEntitySet="Dil">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Isim" ColumnName="Isim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmanetKitaplar">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.EmanetKitaplar">
+              <MappingFragment StoreEntitySet="EmanetKitaplar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KitapId" ColumnName="KitapId" />
+                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+                <ScalarProperty Name="AldigiTarih" ColumnName="AldigiTarih" />
+                <ScalarProperty Name="VerecegiTarih" ColumnName="VerecegiTarih" />
+                <ScalarProperty Name="VerdigiTarih" ColumnName="VerdigiTarih" />
+                <ScalarProperty Name="Borcu" ColumnName="Borcu" />
+                <ScalarProperty Name="HasarDurumu" ColumnName="HasarDurumu" />
+                <ScalarProperty Name="TeslimDurumu" ColumnName="TeslimDurumu" />
+                <ScalarProperty Name="HasarYeri" ColumnName="HasarYeri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeweyId" ColumnName="DeweyId" />
+                <ScalarProperty Name="Isim" ColumnName="Isim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kitap">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.Kitap">
+              <MappingFragment StoreEntitySet="Kitap">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="YazarId" ColumnName="YazarId" />
+                <ScalarProperty Name="Cevirmen" ColumnName="Cevirmen" />
+                <ScalarProperty Name="YayinEviId" ColumnName="YayinEviId" />
+                <ScalarProperty Name="Sayfa" ColumnName="Sayfa" />
+                <ScalarProperty Name="IlkBasimYili" ColumnName="IlkBasimYili" />
+                <ScalarProperty Name="Ebat" ColumnName="Ebat" />
+                <ScalarProperty Name="BasimSayisi" ColumnName="BasimSayisi" />
+                <ScalarProperty Name="DilId" ColumnName="DilId" />
+                <ScalarProperty Name="CiltTipi" ColumnName="CiltTipi" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="StokAdedi" ColumnName="StokAdedi" />
+                <ScalarProperty Name="DeweyKod" ColumnName="DeweyKod" />
+                <ScalarProperty Name="YerNumarasi" ColumnName="YerNumarasi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KitapKategorileri">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.KitapKategorileri">
+              <MappingFragment StoreEntitySet="KitapKategorileri">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KitapId" ColumnName="KitapId" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KitapYazarlari">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.KitapYazarlari">
+              <MappingFragment StoreEntitySet="KitapYazarlari">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="YazarId" ColumnName="YazarId" />
+                <ScalarProperty Name="KitapId" ColumnName="KitapId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tc" ColumnName="Tc" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="DogumTarihi" ColumnName="DogumTarihi" />
+                <ScalarProperty Name="DogumYeri" ColumnName="DogumYeri" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="UyelikTarihi" ColumnName="UyelikTarihi" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Yetki" ColumnName="Yetki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yazar">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.Yazar">
+              <MappingFragment StoreEntitySet="Yazar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Isim" ColumnName="Isim" />
+                <ScalarProperty Name="Soyisim" ColumnName="Soyisim" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="dbLibrarySomeeModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="dbLibrarySomeeModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="dbLibrarySomeeModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="dbLibrarySomeeModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbLibrarySomeeModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="dbLibrarySomeeModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbLibrarySomeeModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbLibrarySomeeModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbLibrarySomeeModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
