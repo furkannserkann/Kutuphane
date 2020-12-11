@@ -22,10 +22,10 @@ namespace Kutuphane.Models.Entity
         }
     
         public int ID { get; set; }
-        [Range(000, 9999, ErrorMessage = "Dewey Kodunu Doðru Deðil [0-9999]")]
+        [Range(000, 9999, ErrorMessage = "Dewey Kodu Doðru Deðil [0-9999]")]
         [Required(ErrorMessage = "Dewey Kodunu Giriniz")]
         public string DeweyId { get; set; }
-        [StringLength(3, ErrorMessage = "Ýsim En Fazla 100 Karakter Olabilir")]
+        [StringLength(100, ErrorMessage = "Ýsim En Fazla 100 Karakter Olabilir")]
         [Required(ErrorMessage = "Kategori Adýný Giriniz")]
         public string Isim { get; set; }
     

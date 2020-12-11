@@ -8,7 +8,7 @@
 @using (Html.BeginForm())
 {
     <div class="form-horizontal">
-        <h2>Kategori Ekle</h2>
+        <h2>Yeni Kategori</h2>
         <hr />
 
         <div class="form-group">
@@ -41,33 +41,36 @@
     </div>
 
 
+
+    // Sağ üstten gelen uyarı mesaj kodu, her sayfada kendisine göre ayarlanmalı
     <script type="text/javascript">
+        var isInsert = false;
+
         $(document).ready(function () {
             $('#insert').click(function () {
-                var id = $('#DeweyId').val();
-                var name = $('#Isim').val();
-                var lJson = { DeweyId: id, Isim: name };
+                if (!isInsert) {
+                    isInsert = true;
 
-                $.ajax({
-                    type: "POST",
-                    url: "/Kategori/Insert",
-                    dataType: "json",
-                    data: lJson,
-                    success: function (data) {
-                        if (data.success == 0) {
-                            toastr.success(data.message, "", { extendedTimeOut: true, timeOut: 4000, progressBar: true, showMethod: 'slideDown', hideMethod: 'slideUp' });
-                            $('#DeweyId').val("");
-                            $('#Isim').val("");
+                    var id = $('#DeweyId').val();
+                    var name = $('#Isim').val();
+                    var lJson = { DeweyId: id, Isim: name };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Kategori/Insert",
+                        dataType: "json",
+                        data: lJson,
+                        success: function (data) {
+                            if (data.success == 0) {
+                                $('#DeweyId').val("");
+                                $('#Isim').val("");
+                            }
+
+                            myToastr(data);
+                            isInsert = false;
                         }
-                        else if (data.success == 1)
-                        {
-                            toastr.error(data.message, "", { extendedTimeOut: true, timeOut: 4000, progressBar: true, showMethod: 'slideDown', hideMethod: 'slideUp' });
-                        }
-                        else if (data.success == 2) {
-                            toastr.info(data.message, "", { extendedTimeOut: true, timeOut: 7000, progressBar: true, showMethod: 'slideDown', hideMethod: 'slideUp' });
-                        }
-                    }
-                });
+                    });
+                }
             });
         });
     </script>
