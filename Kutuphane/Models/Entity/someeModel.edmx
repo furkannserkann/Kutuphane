@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbLibrarySomeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbLibrarySomeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dil">
           <Key>
             <PropertyRef Name="ID" />
@@ -101,6 +101,13 @@
           <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="Yetki" Type="int" />
         </EntityType>
+        <EntityType Name="YayinEvi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Isim" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Yazar">
           <Key>
             <PropertyRef Name="ID" />
@@ -143,6 +150,18 @@
             </Principal>
             <Dependent Role="Kitap">
               <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kitap__YayinEviI__47DBAE45">
+          <End Role="YayinEvi" Type="Self.YayinEvi" Multiplicity="0..1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YayinEvi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="YayinEviId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -234,6 +253,7 @@
           <EntitySet Name="KitapYazarlari" EntityType="Self.KitapYazarlari" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YayinEvi" EntityType="Self.YayinEvi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Yazar" EntityType="Self.Yazar" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__EmanetKit__Kitap__398D8EEE" Association="Self.FK__EmanetKit__Kitap__398D8EEE">
             <End Role="Kitap" EntitySet="Kitap" />
@@ -245,6 +265,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__Kitap__DilId__2A4B4B5E" Association="Self.FK__Kitap__DilId__2A4B4B5E">
             <End Role="Dil" EntitySet="Dil" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kitap__YayinEviI__47DBAE45" Association="Self.FK__Kitap__YayinEviI__47DBAE45">
+            <End Role="YayinEvi" EntitySet="YayinEvi" />
             <End Role="Kitap" EntitySet="Kitap" />
           </AssociationSet>
           <AssociationSet Name="FK__KitapKate__Kateg__2E1BDC42" Association="Self.FK__KitapKate__Kateg__2E1BDC42">
@@ -264,8 +288,7 @@
             <End Role="KitapYazarlari" EntitySet="KitapYazarlari" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbLibrarySomeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -327,6 +350,7 @@
           <NavigationProperty Name="EmanetKitaplar" Relationship="Self.FK__EmanetKit__Kitap__398D8EEE" FromRole="Kitap" ToRole="EmanetKitaplar" />
           <NavigationProperty Name="KitapKategorileri" Relationship="Self.FK__KitapKate__Kitap__2D27B809" FromRole="Kitap" ToRole="KitapKategorileri" />
           <NavigationProperty Name="KitapYazarlari" Relationship="Self.FK__KitapYaza__Kitap__31EC6D26" FromRole="Kitap" ToRole="KitapYazarlari" />
+          <NavigationProperty Name="YayinEvi" Relationship="dbLibrarySomeeModel.FK__Kitap__YayinEviI__47DBAE45" FromRole="Kitap" ToRole="YayinEvi" />
         </EntityType>
         <EntityType Name="KitapKategorileri">
           <Key>
@@ -540,6 +564,11 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="YayinEvi" EntityType="dbLibrarySomeeModel.YayinEvi" />
+          <AssociationSet Name="FK__Kitap__YayinEviI__47DBAE45" Association="dbLibrarySomeeModel.FK__Kitap__YayinEviI__47DBAE45">
+            <End Role="YayinEvi" EntitySet="YayinEvi" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -552,6 +581,26 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="YayinEvi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kitap" Relationship="dbLibrarySomeeModel.FK__Kitap__YayinEviI__47DBAE45" FromRole="YayinEvi" ToRole="Kitap" />
+        </EntityType>
+        <Association Name="FK__Kitap__YayinEviI__47DBAE45">
+          <End Type="dbLibrarySomeeModel.YayinEvi" Role="YayinEvi" Multiplicity="0..1" />
+          <End Type="dbLibrarySomeeModel.Kitap" Role="Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YayinEvi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="YayinEviId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -696,6 +745,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbLibrarySomeeModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbLibrarySomeeModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="YayinEvi">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.YayinEvi">
+              <MappingFragment StoreEntitySet="YayinEvi">
+                <ScalarProperty Name="Isim" ColumnName="Isim" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e9a18e3a1f194f0ba912a1b9a2b1b04f" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="e9a18e3a1f194f0ba912a1b9a2b1b04f" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="dbLibrarySomeeModel.Dil" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbLibrarySomeeModel.EmanetKitaplar" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbLibrarySomeeModel.Kategori" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
@@ -21,6 +21,8 @@
         <AssociationConnector Association="dbLibrarySomeeModel.FK__KitapKate__Kitap__2D27B809" ManuallyRouted="false" />
         <AssociationConnector Association="dbLibrarySomeeModel.FK__KitapYaza__Kitap__31EC6D26" ManuallyRouted="false" />
         <AssociationConnector Association="dbLibrarySomeeModel.FK__KitapYaza__Yazar__30F848ED" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbLibrarySomeeModel.YayinEvi" Width="1.5" PointX="0.75" PointY="2" />
+        <AssociationConnector Association="dbLibrarySomeeModel.FK__Kitap__YayinEviI__47DBAE45" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

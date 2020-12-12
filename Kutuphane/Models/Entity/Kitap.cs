@@ -46,5 +46,6 @@ namespace Kutuphane.Models.Entity
         public virtual ICollection<KitapKategorileri> KitapKategorileri { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KitapYazarlari> KitapYazarlari { get; set; }
+        public virtual YayinEvi YayinEvi { get; set; }
     }
 }

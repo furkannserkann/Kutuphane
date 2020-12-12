@@ -11,25 +11,19 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Kategori
+    
+    public partial class YayinEvi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Kategori()
+        public YayinEvi()
         {
-            this.KitapKategorileri = new HashSet<KitapKategorileri>();
+            this.Kitap = new HashSet<Kitap>();
         }
     
         public int ID { get; set; }
-        [Required(ErrorMessage = "Dewey Kodunu Giriniz")]
-        [Range(0, 999, ErrorMessage = "Lütfen [0-999] Arasýnda Giriniz")]
-        public string DeweyId { get; set; }
-        [Required(ErrorMessage = "Kategori Adý Giriniz")]
-        [StringLength(100, ErrorMessage = "En Fazla 100 Karakter Olabilir")]
         public string Isim { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KitapKategorileri> KitapKategorileri { get; set; }
+        public virtual ICollection<Kitap> Kitap { get; set; }
     }
 }

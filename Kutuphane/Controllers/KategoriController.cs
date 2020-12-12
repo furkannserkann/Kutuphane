@@ -12,19 +12,27 @@ namespace Kutuphane.Controllers
 {
     public class KategoriController : Controller
     {
-        //dbLibraryEntities db = new dbLibraryEntities();
         dbLibrarySomeeEntities db = new dbLibrarySomeeEntities();
         public bool isInsert = false;
         public bool isDelete = false;
         public bool isUpdate = false;
 
         // GET: Kategori
-        [HttpGet]
-        public ActionResult Index(int? page)
+        public ActionResult Index(string DeweyId, string Isim, int? page)
         {
-            var dataList = db.Kategori.ToList().OrderBy(kat => kat.DeweyId).ToPagedList(page ?? 1, 10);
+            //if (filter.DeweyId == null && filter.Isim == null)
+            if (string.IsNullOrEmpty(DeweyId) && string.IsNullOrEmpty(Isim))
+            {
+                var dataList = db.Kategori.OrderBy(kat => kat.DeweyId).ToPagedList(page ?? 1, 10);
+                return View(dataList);
+            }
 
-            return View(dataList);
+            if (string.IsNullOrEmpty(DeweyId)) DeweyId = "";
+            if (string.IsNullOrEmpty(Isim)) Isim = "";
+
+            var dataListFilter = db.Kategori.Where(x => x.DeweyId.Contains(DeweyId) && x.Isim.Contains(Isim))
+                .OrderBy(kat => kat.DeweyId).ToPagedList(page ?? 1, 10);
+            return View(dataListFilter);
         }
 
 
@@ -66,7 +74,7 @@ namespace Kutuphane.Controllers
                 try
                 {
                     // DeweyId veritabanında kayıtlımı
-                    int data = db.Kategori.Where(i => i.DeweyId == kategori.DeweyId).ToList().Count;
+                    int data = db.Kategori.Where(i => i.DeweyId == kategori.DeweyId).Count();
                     if (data != 0)
                     {
                         isInsert = false;
@@ -74,7 +82,7 @@ namespace Kutuphane.Controllers
                     }
 
                     // İsim veritabanında kayıtlımı
-                    data = db.Kategori.Where(i => i.Isim == kategori.Isim).ToList().Count;
+                    data = db.Kategori.Where(i => i.Isim == kategori.Isim).Count();
                     if (data != 0)
                     {
                         isInsert = false;
@@ -114,6 +122,11 @@ namespace Kutuphane.Controllers
             var datas = db.Kategori.Where(x => x.ID == katID).SingleOrDefault();
             if (datas != null)
             {
+                if (datas.KitapKategorileri.Count != 0)
+                {
+                    isDelete = false;
+                    return Json(data: new { success = 3, message = "KAYITLI KİTAP BULUNUYOR!", title = "SİLİNEMEZ" }, JsonRequestBehavior.AllowGet);
+                }
 
                 db.Kategori.Remove(datas);
                 db.SaveChanges();
@@ -170,7 +183,7 @@ namespace Kutuphane.Controllers
                 try
                 {
                     // DeweyId veritabanında kayıtlımı
-                    int data = db.Kategori.Where(i => i.DeweyId == kategori.DeweyId && i.ID != kategori.ID).ToList().Count;
+                    int data = db.Kategori.Where(i => i.DeweyId == kategori.DeweyId && i.ID != kategori.ID).Count();
                     if (data != 0)
                     {
                         isUpdate = false;
@@ -178,7 +191,7 @@ namespace Kutuphane.Controllers
                     }
 
                     // İsim veritabanında kayıtlımı
-                    data = db.Kategori.Where(i => i.Isim == kategori.Isim && i.ID != kategori.ID).ToList().Count;
+                    data = db.Kategori.Where(i => i.Isim == kategori.Isim && i.ID != kategori.ID).Count();
                     if (data != 0)
                     {
                         isUpdate = false;

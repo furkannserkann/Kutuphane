@@ -11,7 +11,8 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Yazar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,13 @@ namespace Kutuphane.Models.Entity
         }
     
         public int ID { get; set; }
+        [Required(ErrorMessage = "Yazar Adýný Giriniz")]
+        [StringLength(100, ErrorMessage = "En Fazla 100 Karakter Olabilir")]
         public string Isim { get; set; }
+        [Required(ErrorMessage = "Yazar Soyadýný Giriniz")]
+        [StringLength(100, ErrorMessage = "En Fazla 100 Karakter Olabilir")]
         public string Soyisim { get; set; }
+        [StringLength(255, ErrorMessage = "En Fazla 255 Karakter Olabilir")]
         public string Aciklama { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

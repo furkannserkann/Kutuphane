@@ -36,6 +36,7 @@ namespace Kutuphane.Models.Entity
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Yazar> Yazar { get; set; }
+        public virtual DbSet<YayinEvi> YayinEvi { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
