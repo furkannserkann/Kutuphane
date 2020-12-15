@@ -6,6 +6,6 @@ using System.Web;
 namespace Kutuphane.Img
 {
     public class Class1
-    {
+    {s
     }
 }
