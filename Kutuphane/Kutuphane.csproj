@@ -141,6 +141,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Img\Class1.cs" />
+    <Compile Include="Img\Class2.cs" />
     <Compile Include="Models\Entity\Dil.cs">
       <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
