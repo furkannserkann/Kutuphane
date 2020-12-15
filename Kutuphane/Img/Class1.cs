@@ -7,6 +7,8 @@ namespace Kutuphane.Img
 {
     public class Class1
     {
+        // asdasdasd
+        // asdasdsa
         // asd
 
         public void asd()
