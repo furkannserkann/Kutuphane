@@ -11,8 +11,7 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Kategori
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +21,7 @@ namespace Kutuphane.Models.Entity
         }
     
         public int ID { get; set; }
-        [Required(ErrorMessage = "Dewey Kodunu Giriniz")]
-        [Range(0, 999, ErrorMessage = "Lütfen [0-999] Arasýnda Giriniz")]
         public string DeweyId { get; set; }
-        [Required(ErrorMessage = "Kategori Adý Giriniz")]
-        [StringLength(100, ErrorMessage = "En Fazla 100 Karakter Olabilir")]
         public string Isim { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

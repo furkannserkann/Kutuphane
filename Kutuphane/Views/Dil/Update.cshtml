@@ -1,4 +1,4 @@
-﻿@model Kutuphane.Models.Entity.Yazar
+﻿@model Kutuphane.Models.Entity.Dil
 
 @{
     ViewBag.Title = "Update";
@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h2>Yazar Bilgilerini Güncelle</h2>
+        <h2>Dil Bilgilerini Güncelle</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -18,24 +18,8 @@
         <div class="form-group">
             <span class="control-label col-md-2">İsim</span>
             <div class="col-md-3">
-                @Html.EditorFor(model => model.Isim, new { htmlAttributes = new { @class = "form-control", placeholder = "Yazar Adı" } })
+                @Html.EditorFor(model => model.Isim, new { htmlAttributes = new { @class = "form-control", placeholder = "Dil Adı" } })
                 @Html.ValidationMessageFor(model => model.Isim, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <span class="control-label col-md-2">Soyisim</span>
-            <div class="col-md-3">
-                @Html.EditorFor(model => model.Soyisim, new { htmlAttributes = new { @class = "form-control", placeholder = "Yazar Soyadı" } })
-                @Html.ValidationMessageFor(model => model.Soyisim, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <span class="control-label col-md-2">Hakkında</span>
-            <div class="col-md-3">
-                @Html.TextArea("Aciklama", null, new { @class = "form-control", rows = "5", style = "min-height: 100px; min-width: 275px; max-width: 750px;", placeholder = "Hakkında bilgiler doğrum tarihi, doğrum yeri vb." })
-                @Html.ValidationMessageFor(model => model.Aciklama, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -49,7 +33,7 @@
 
 <hr />
 <div>
-    <a href="/Yazar/Index" class="btn btn-primary">Yazar Listesi</a>
+    <a href="/Dil/Index" class="btn btn-primary">Dil Listesi</a>
 </div>
 
 
@@ -60,7 +44,7 @@
 
             <div class="modal-header">
                 <a href="#" class="close h1" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">YAZAR BİLGİLERİ GÜNCELLENİYOR</h3>
+                <h3 class="modal-title">DİL BİLGİLERİ GÜNCELLENİYOR</h3>
             </div>
 
             <div class="modal-body">
@@ -93,13 +77,11 @@
 
                 var id = $('#ID').val();
                 var name = $('#Isim').val();
-                var surname = $('#Soyisim').val();
-                var about = $('#Aciklama').val();
-                var lJson = { ID: id, Isim: name, Soyisim: surname, Aciklama: about };
+                var lJson = { ID: id, Isim: name };
 
                 $.ajax({
                     type: "POST",
-                    url: "/Yazar/Update",
+                    url: "/Dil/Update",
                     dataType: "json",
                     data: lJson,
                     success: function (data) {

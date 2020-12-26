@@ -11,7 +11,9 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,18 +23,58 @@ namespace Kutuphane.Models.Entity
         }
     
         public int ID { get; set; }
+        [DisplayName("TC NO")]
+        [Required(ErrorMessage = "TC NO Giriniz")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "TC NO 11 Haneli Olmalýdýr!")]
+        [RegularExpression("[0-9]+", ErrorMessage = "Sadece Sayý Ýçerebilir")]
         public string Tc { get; set; }
+        [DisplayName("ÝSÝM")]
+        [Required(ErrorMessage = "Ýsim Giriniz")]
+        [StringLength(50, ErrorMessage = "En Fazla 50 Karakter Olabilir")]
+        [RegularExpression("[a-zA-Zçðýöþü]+", ErrorMessage = "Sadece Harf Ýçerebilir")]
         public string Adi { get; set; }
+        [DisplayName("SOYÝSÝM")]
+        [Required(ErrorMessage = "Soyisim Giriniz")]
+        [StringLength(50, ErrorMessage = "En Fazla 50 Karakter Olabilir")]
+        [RegularExpression("[a-zA-Zçðýöþü]+", ErrorMessage = "Sadece Harf Ýçerebilir")]
         public string Soyadi { get; set; }
+        [DisplayName("DOÐUM TARÝHÝ")]
+        [Required(ErrorMessage = "DOÐUM TARÝHÝ Giriniz")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> DogumTarihi { get; set; }
+        [DisplayName("DOÐUM YERÝ")]
         public string DogumYeri { get; set; }
+        [Required(ErrorMessage = "Telefon Numarasý Giriniz")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "Telefon Numarasý 11 Haneli Olmalý")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression("[0-9]+", ErrorMessage = "Hatalý Telefon Numarasý")]
+        [DisplayName("TELEFON")]
         public string Telefon { get; set; }
+        [DisplayName("ÜYELÝK TARÝHÝ")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> UyelikTarihi { get; set; }
+        [DisplayName("CÝNSÝYET")]
         public string Cinsiyet { get; set; }
+        [DisplayName("ADRES")]
+        [Required(ErrorMessage = "Adres Giriniz")]
+        [StringLength(250, ErrorMessage = "En Fazla 250 Karakter Olabilir")]
         public string Adres { get; set; }
+        [DisplayName("EMAÝL")]
+        [Required(ErrorMessage = "Email Giriniz")]
+        [EmailAddress(ErrorMessage = "Hatalý Email Adresi")]
+        [StringLength(100, ErrorMessage = "En Fazla 100 Karakter Olabilir")]
         public string Email { get; set; }
+        [DisplayName("KULLANICI ADI")]
+        [Required(ErrorMessage = "Kullanýcý Adý Giriniz")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Uzunluk 6-50 Arasýnda Olmalýdýr")]
+        [RegularExpression("[a-zA-Zçðýöþü0-9]+", ErrorMessage = "Sadece Harf ve Sayý Ýçerebilir")]
         public string Username { get; set; }
+        [DisplayName("ÞÝFRE")]
+        [Required(ErrorMessage = "Þifre Giriniz")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Uzunluk 6-50 Arasýnda Olmalýdýr")]
+        [RegularExpression("[a-zA-Zçðýöþü0-9.\"-]+", ErrorMessage = "Sadece Harf, Sayý ve Özel Karakter [. \" -] Ýçerebilir")]
         public string Password { get; set; }
+        [DisplayName("YETKÝ")]
         public Nullable<int> Yetki { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -11,7 +11,9 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Kitap
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,23 +23,31 @@ namespace Kutuphane.Models.Entity
             this.KitapKategorileri = new HashSet<KitapKategorileri>();
             this.KitapYazarlari = new HashSet<KitapYazarlari>();
         }
-    
         public int ID { get; set; }
+        [Required(ErrorMessage = "ISBN Numarasýný Giriniz")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Sadece Sayýlardan Oluþmalýdýr")]
         public string ISBN { get; set; }
+        [Required(ErrorMessage = "Kitap Adýný Giriniz")]
         public string Adi { get; set; }
-        public Nullable<int> YazarId { get; set; }
         public string Cevirmen { get; set; }
         public Nullable<int> YayinEviId { get; set; }
+        [Required(ErrorMessage = "Sayfa Sayýsýný Giriniz [min:1]")]
+        [Range(1, 99999)]
         public Nullable<int> Sayfa { get; set; }
-        public string IlkBasimYili { get; set; }
+        [Required(ErrorMessage = "Basým Yýlý Giriniz [min:1000]")]
+        [Range(1000, 2100)]
+        public Nullable<int> IlkBasimYili { get; set; }
+        [Required(ErrorMessage = "Boyut Bilgisini Giriniz")]
         public string Ebat { get; set; }
-        public string BasimSayisi { get; set; }
+        [Required(ErrorMessage = "Basým Sayýsý Giriniz [min:1]")]
+        [Range(1, 2000)]
+        public Nullable<int> BasimSayisi { get; set; }
+        [Required(ErrorMessage = "Lütfen Dil Seçiniz")]
         public Nullable<int> DilId { get; set; }
         public string CiltTipi { get; set; }
         public string Aciklama { get; set; }
         public Nullable<int> StokAdedi { get; set; }
         public string DeweyKod { get; set; }
-        public string YerNumarasi { get; set; }
     
         public virtual Dil Dil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,5 +57,14 @@ namespace Kutuphane.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KitapYazarlari> KitapYazarlari { get; set; }
         public virtual YayinEvi YayinEvi { get; set; }
+
+        [NotMapped]
+        public string[] filterDeweyIds { get; set; }
+        [NotMapped]
+        public string[] filterYazarIds { get; set; }
+        [NotMapped]
+        public string[] filterYayineviIds { get; set; }
+        [NotMapped]
+        public string[] filterDilIds { get; set; }
     }
 }

@@ -42,19 +42,17 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ISBN" Type="nvarchar" MaxLength="20" />
           <Property Name="Adi" Type="nvarchar(max)" />
-          <Property Name="YazarId" Type="int" />
           <Property Name="Cevirmen" Type="nvarchar" MaxLength="125" />
           <Property Name="YayinEviId" Type="int" />
           <Property Name="Sayfa" Type="int" />
-          <Property Name="IlkBasimYili" Type="nvarchar" MaxLength="4" />
+          <Property Name="IlkBasimYili" Type="int" />
           <Property Name="Ebat" Type="nvarchar" MaxLength="20" />
-          <Property Name="BasimSayisi" Type="nvarchar" MaxLength="10" />
+          <Property Name="BasimSayisi" Type="int" />
           <Property Name="DilId" Type="int" />
           <Property Name="CiltTipi" Type="nvarchar" MaxLength="100" />
           <Property Name="Aciklama" Type="nvarchar(max)" />
           <Property Name="StokAdedi" Type="int" />
           <Property Name="DeweyKod" Type="nvarchar(max)" />
-          <Property Name="YerNumarasi" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="KitapKategorileri">
           <Key>
@@ -333,19 +331,17 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ISBN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="YazarId" Type="Int32" />
           <Property Name="Cevirmen" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
           <Property Name="YayinEviId" Type="Int32" />
           <Property Name="Sayfa" Type="Int32" />
-          <Property Name="IlkBasimYili" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="IlkBasimYili" Type="Int32" />
           <Property Name="Ebat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BasimSayisi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BasimSayisi" Type="Int32" />
           <Property Name="DilId" Type="Int32" />
           <Property Name="CiltTipi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StokAdedi" Type="Int32" />
           <Property Name="DeweyKod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="YerNumarasi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Dil" Relationship="Self.FK__Kitap__DilId__2A4B4B5E" FromRole="Kitap" ToRole="Dil" />
           <NavigationProperty Name="EmanetKitaplar" Relationship="Self.FK__EmanetKit__Kitap__398D8EEE" FromRole="Kitap" ToRole="EmanetKitaplar" />
           <NavigationProperty Name="KitapKategorileri" Relationship="Self.FK__KitapKate__Kitap__2D27B809" FromRole="Kitap" ToRole="KitapKategorileri" />
@@ -646,7 +642,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ISBN" ColumnName="ISBN" />
                 <ScalarProperty Name="Adi" ColumnName="Adi" />
-                <ScalarProperty Name="YazarId" ColumnName="YazarId" />
                 <ScalarProperty Name="Cevirmen" ColumnName="Cevirmen" />
                 <ScalarProperty Name="YayinEviId" ColumnName="YayinEviId" />
                 <ScalarProperty Name="Sayfa" ColumnName="Sayfa" />
@@ -658,7 +653,6 @@
                 <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
                 <ScalarProperty Name="StokAdedi" ColumnName="StokAdedi" />
                 <ScalarProperty Name="DeweyKod" ColumnName="DeweyKod" />
-                <ScalarProperty Name="YerNumarasi" ColumnName="YerNumarasi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

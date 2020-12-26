@@ -97,6 +97,7 @@
                     success: function (data) {
                         myToastr(data);
                         $("#updateModal").modal("hide");
+                        $('#loadingBarUpdate').hide();
 
                         isClickUpdate = false;
                     }
