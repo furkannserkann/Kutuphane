@@ -23,6 +23,7 @@ namespace Kutuphane.Models.Entity
             this.KitapKategorileri = new HashSet<KitapKategorileri>();
             this.KitapYazarlari = new HashSet<KitapYazarlari>();
         }
+
         public int ID { get; set; }
         [Required(ErrorMessage = "ISBN Numarasýný Giriniz")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Sadece Sayýlardan Oluþmalýdýr")]
@@ -48,6 +49,7 @@ namespace Kutuphane.Models.Entity
         public string Aciklama { get; set; }
         public Nullable<int> StokAdedi { get; set; }
         public string DeweyKod { get; set; }
+        public Nullable<bool> EmaneteUygunmu { get; set; }
     
         public virtual Dil Dil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

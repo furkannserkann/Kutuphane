@@ -13,8 +13,9 @@ namespace Kutuphane.Models.Entity
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class EmanetKitaplar
+    public partial class ViewEmanetKitaplar
     {
         public int ID { get; set; }
         [DisplayName("KÝTAP")]
@@ -39,8 +40,12 @@ namespace Kutuphane.Models.Entity
         public Nullable<bool> TeslimDurumu { get; set; }
         [DisplayName("HASAR YERÝ")]
         public string HasarYeri { get; set; }
-    
-        public virtual Kitap Kitap { get; set; }
-        public virtual Users Users { get; set; }
+        public string kullaniciAdiSoyadi { get; set; }
+        public string kitapAdi { get; set; }
+
+        [NotMapped]
+        public string[] filterBookIds { get; set; }
+        [NotMapped]
+        public string[] filterUserIds { get; set; }
     }
 }

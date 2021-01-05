@@ -98,15 +98,16 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="glyphicon glyphicon-align-justify closebtn" onclick="HideShowNav()"></a>
-        <a href="#" class="glyphicon glyphicon-home"><span class="pagename">Anasayfa</span></a>
+        @*<a href="#" class="glyphicon glyphicon-home"><span class="pagename">Anasayfa</span></a>*@
+        <a href="/EmanetVer/Index" class="glyphicon glyphicon-share"><span class="pagename">Emanet İşlemleri</span></a>
+        <a href="/User/Index" class="glyphicon glyphicon-user"><span class="pagename">Kullanıcılar</span></a>
         <a href="/Kitap/Index" class="glyphicon glyphicon-book"><span class="pagename">Kitaplar</span></a>
         <a href="/Kategori/Index" class="glyphicon glyphicon-list"><span class="pagename">Kategoriler</span></a>
         <a href="/Yazar/Index" class="glyphicon glyphicon-pencil"><span class="pagename">Yazarlar</span></a>
         <a href="/Dil/Index" class="glyphicon glyphicon-text-color"><span class="pagename">Diller</span></a>
         <a href="/YayinEvi/Index" class="glyphicon glyphicon-pushpin"><span class="pagename">Yayın Evi</span></a>
-        <a href="/User/Index" class="glyphicon glyphicon-user"><span class="pagename">Kullanıcılar</span></a>
-        <a href="#" class="glyphicon glyphicon-share"><span class="pagename">Ödünç Kitap Ver</span></a>
-        <a href="#" class="glyphicon glyphicon-check"><span class="pagename">Ödünç Kitap Al</span></a>
+
+
         <a href="#" class="glyphicon glyphicon-remove-sign"><span class="pagename">Çıkış</span></a>
     </div>
 
@@ -182,13 +183,12 @@
             else if (window.location.href.indexOf('User') != -1) {
                 (document.getElementsByClassName('glyphicon glyphicon-user'))[0].classList.add("active");
             }
-            else if (window.location.href.indexOf('KitapVer') != -1) {
+            else if (window.location.href.indexOf('EmanetVer') != -1) {
                 (document.getElementsByClassName('glyphicon glyphicon-share'))[0].classList.add("active");
             }
-            else if (window.location.href.indexOf('KitapAl') != -1) {
+            else if (window.location.href.indexOf('EmanetAl') != -1) {
                 (document.getElementsByClassName('glyphicon glyphicon-check'))[0].classList.add("active");
             }
-            
         }
 
         closeNav();

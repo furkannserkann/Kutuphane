@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DilController.cs" />
+    <Compile Include="Controllers\EmanetVerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
     <Compile Include="Controllers\KitapController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\ApplyFormatInEditMode.cs" />
     <Compile Include="Models\Entity\Dil.cs">
       <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
@@ -187,6 +189,9 @@
       <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Users.cs">
+      <DependentUpon>someeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\ViewEmanetKitaplar.cs">
       <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\YayinEvi.cs">
@@ -326,6 +331,9 @@
     <Content Include="Views\User\Insert.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\User\Detail.cshtml" />
+    <Content Include="Views\EmanetVer\Index.cshtml" />
+    <Content Include="Views\EmanetVer\Insert.cshtml" />
+    <Content Include="Views\EmanetVer\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,6 +53,7 @@
           <Property Name="Aciklama" Type="nvarchar(max)" />
           <Property Name="StokAdedi" Type="int" />
           <Property Name="DeweyKod" Type="nvarchar(max)" />
+          <Property Name="EmaneteUygunmu" Type="bit" />
         </EntityType>
         <EntityType Name="KitapKategorileri">
           <Key>
@@ -114,6 +115,25 @@
           <Property Name="Isim" Type="nvarchar" MaxLength="50" />
           <Property Name="Soyisim" Type="nvarchar" MaxLength="50" />
           <Property Name="Aciklama" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbLibrarySomee.dbo.ViewEmanetKitaplar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewEmanetKitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="KitapId" Type="int" />
+          <Property Name="KullaniciId" Type="int" />
+          <Property Name="AldigiTarih" Type="datetime" />
+          <Property Name="VerecegiTarih" Type="date" />
+          <Property Name="VerdigiTarih" Type="date" />
+          <Property Name="TeslimDurumu" Type="bit" />
+          <Property Name="Borcu" Type="money" />
+          <Property Name="HasarDurumu" Type="nvarchar(max)" />
+          <Property Name="HasarYeri" Type="nvarchar(max)" />
+          <Property Name="kullaniciAdiSoyadi" Type="nvarchar" MaxLength="101" />
+          <Property Name="kitapAdi" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK__EmanetKit__Kitap__398D8EEE">
           <End Role="Kitap" Type="Self.Kitap" Multiplicity="0..1" />
@@ -253,6 +273,22 @@
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YayinEvi" EntityType="Self.YayinEvi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Yazar" EntityType="Self.Yazar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewEmanetKitaplar" EntityType="Self.ViewEmanetKitaplar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewEmanetKitaplar].[ID] AS [ID], 
+    [ViewEmanetKitaplar].[KitapId] AS [KitapId], 
+    [ViewEmanetKitaplar].[KullaniciId] AS [KullaniciId], 
+    [ViewEmanetKitaplar].[AldigiTarih] AS [AldigiTarih], 
+    [ViewEmanetKitaplar].[VerecegiTarih] AS [VerecegiTarih], 
+    [ViewEmanetKitaplar].[VerdigiTarih] AS [VerdigiTarih], 
+    [ViewEmanetKitaplar].[TeslimDurumu] AS [TeslimDurumu], 
+    [ViewEmanetKitaplar].[Borcu] AS [Borcu], 
+    [ViewEmanetKitaplar].[HasarDurumu] AS [HasarDurumu], 
+    [ViewEmanetKitaplar].[HasarYeri] AS [HasarYeri], 
+    [ViewEmanetKitaplar].[kullaniciAdiSoyadi] AS [kullaniciAdiSoyadi], 
+    [ViewEmanetKitaplar].[kitapAdi] AS [kitapAdi]
+    FROM [dbo].[ViewEmanetKitaplar] AS [ViewEmanetKitaplar]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__EmanetKit__Kitap__398D8EEE" Association="Self.FK__EmanetKit__Kitap__398D8EEE">
             <End Role="Kitap" EntitySet="Kitap" />
             <End Role="EmanetKitaplar" EntitySet="EmanetKitaplar" />
@@ -347,6 +383,7 @@
           <NavigationProperty Name="KitapKategorileri" Relationship="Self.FK__KitapKate__Kitap__2D27B809" FromRole="Kitap" ToRole="KitapKategorileri" />
           <NavigationProperty Name="KitapYazarlari" Relationship="Self.FK__KitapYaza__Kitap__31EC6D26" FromRole="Kitap" ToRole="KitapYazarlari" />
           <NavigationProperty Name="YayinEvi" Relationship="dbLibrarySomeeModel.FK__Kitap__YayinEviI__47DBAE45" FromRole="Kitap" ToRole="YayinEvi" />
+          <Property Name="EmaneteUygunmu" Type="Boolean" />
         </EntityType>
         <EntityType Name="KitapKategorileri">
           <Key>
@@ -565,6 +602,7 @@
             <End Role="YayinEvi" EntitySet="YayinEvi" />
             <End Role="Kitap" EntitySet="Kitap" />
           </AssociationSet>
+          <EntitySet Name="ViewEmanetKitaplar" EntityType="dbLibrarySomeeModel.ViewEmanetKitaplar" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -597,6 +635,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewEmanetKitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="KitapId" Type="Int32" />
+          <Property Name="KullaniciId" Type="Int32" />
+          <Property Name="AldigiTarih" Type="DateTime" Precision="3" />
+          <Property Name="VerecegiTarih" Type="DateTime" Precision="0" />
+          <Property Name="VerdigiTarih" Type="DateTime" Precision="0" />
+          <Property Name="TeslimDurumu" Type="Boolean" />
+          <Property Name="Borcu" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HasarDurumu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HasarYeri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciAdiSoyadi" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="kitapAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -639,6 +694,7 @@
           <EntitySetMapping Name="Kitap">
             <EntityTypeMapping TypeName="dbLibrarySomeeModel.Kitap">
               <MappingFragment StoreEntitySet="Kitap">
+                <ScalarProperty Name="EmaneteUygunmu" ColumnName="EmaneteUygunmu" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ISBN" ColumnName="ISBN" />
                 <ScalarProperty Name="Adi" ColumnName="Adi" />
@@ -743,6 +799,24 @@
             <EntityTypeMapping TypeName="dbLibrarySomeeModel.YayinEvi">
               <MappingFragment StoreEntitySet="YayinEvi">
                 <ScalarProperty Name="Isim" ColumnName="Isim" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewEmanetKitaplar">
+            <EntityTypeMapping TypeName="dbLibrarySomeeModel.ViewEmanetKitaplar">
+              <MappingFragment StoreEntitySet="ViewEmanetKitaplar">
+                <ScalarProperty Name="kitapAdi" ColumnName="kitapAdi" />
+                <ScalarProperty Name="kullaniciAdiSoyadi" ColumnName="kullaniciAdiSoyadi" />
+                <ScalarProperty Name="HasarYeri" ColumnName="HasarYeri" />
+                <ScalarProperty Name="HasarDurumu" ColumnName="HasarDurumu" />
+                <ScalarProperty Name="Borcu" ColumnName="Borcu" />
+                <ScalarProperty Name="TeslimDurumu" ColumnName="TeslimDurumu" />
+                <ScalarProperty Name="VerdigiTarih" ColumnName="VerdigiTarih" />
+                <ScalarProperty Name="VerecegiTarih" ColumnName="VerecegiTarih" />
+                <ScalarProperty Name="AldigiTarih" ColumnName="AldigiTarih" />
+                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+                <ScalarProperty Name="KitapId" ColumnName="KitapId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

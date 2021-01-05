@@ -273,12 +273,11 @@
     function load() {
         if ($('#Tc').val() == "" && $('#Adi').val() == "" && $('#Soyadi').val() == "" &&
             $('#MinDogumTarihi').val() == "" && $('#MaxDogumTarihi').val() == "" && $('#MinUyelikTarihi').val() == "" &&
-            $('#MaxUyelikTarihi').val() == "" && $('#Cinsiyet').val() == "0" && $('#Yetki').val() == "0")
+            $('#MaxUyelikTarihi').val() == "" && $('#Cinsiyet').val() == "-1" && $('#Yetki').val() == "-1")
             $('#indexClearFilter').hide();
         else
             $('#indexClearFilter').show();
 
-        $('#indexClearFilter').hide();
 
         if (window.location.href.indexOf('%26') != -1 || window.location.href.indexOf('%3D') != -1) {
             window.location.href = window.location.href.replace('%26', '&').replace('%3D', '=')

@@ -23,6 +23,7 @@
         <AssociationConnector Association="dbLibrarySomeeModel.FK__KitapYaza__Yazar__30F848ED" ManuallyRouted="false" />
         <EntityTypeShape EntityType="dbLibrarySomeeModel.YayinEvi" Width="1.5" PointX="0.75" PointY="2" />
         <AssociationConnector Association="dbLibrarySomeeModel.FK__Kitap__YayinEviI__47DBAE45" />
+        <EntityTypeShape EntityType="dbLibrarySomeeModel.ViewEmanetKitaplar" Width="1.5" PointX="11" PointY="4.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -16,12 +16,15 @@ namespace Kutuphane.Models.Entity
 
     public partial class Users
     {
+        public enum Yetkiler { Kullanýcý = 0, Personel = 0, Yönetici = 2 };
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
             this.EmanetKitaplar = new HashSet<EmanetKitaplar>();
         }
-    
+
         public int ID { get; set; }
         [DisplayName("TC NO")]
         [Required(ErrorMessage = "TC NO Giriniz")]
@@ -76,7 +79,7 @@ namespace Kutuphane.Models.Entity
         public string Password { get; set; }
         [DisplayName("YETKÝ")]
         public Nullable<int> Yetki { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmanetKitaplar> EmanetKitaplar { get; set; }
     }

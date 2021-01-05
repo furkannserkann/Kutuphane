@@ -41,7 +41,7 @@ namespace Kutuphane.Controllers
             }
 
 
-            Cinsiyet = Cinsiyet == "1" ? "Erkek" : Cinsiyet == "2" ? "Kadın" : "";
+            Cinsiyet = Cinsiyet == "0" ? "Erkek" : Cinsiyet == "1" ? "Kadın" : "";
 
 
             var dataListFilter = db.Users.Where(x => x.Tc.Contains(Tc) && x.Adi.Contains(Adi) && x.Soyadi.Contains(Soyadi) &&
