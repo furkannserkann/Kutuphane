@@ -108,7 +108,7 @@ namespace Kutuphane.Controllers
             }
 
 
-            var mdataListFilter = dataListFilter.ToPagedList(page ?? 1, 1);
+            var mdataListFilter = dataListFilter.ToPagedList(page ?? 1, 10);
             return View(mdataListFilter);
         }
 

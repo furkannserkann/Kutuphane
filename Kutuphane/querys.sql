@@ -1,7 +1,6 @@
 ﻿UPDATE Kitap
 SET EmaneteUygunmu = 1
 
-
 select * from Kitap
 
 select * from EmanetKitaplar
@@ -37,3 +36,6 @@ ek.HasarYeri, u.Adi + ' ' + u.Soyadi as kullaniciAdiSoyadi, k.Adi as kitapAdi
 from EmanetKitaplar as ek
 inner join Users as u on u.ID = ek.KullaniciId
 inner join Kitap as k on k.Id = ek.KitapId
+
+alter table Yazar
+alter column Aciklama nvarchar(max)
