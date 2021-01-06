@@ -200,7 +200,7 @@ namespace Kutuphane.Controllers
                         return Json(data: new { success = 3, message = "ISBN NUMARASI SİSTEMDE MEVCUT!" }, JsonRequestBehavior.AllowGet);
                     }
 
-
+                    kitap.EmaneteUygunmu = true;
                     db.Kitap.Add(kitap);
 
                     for (int i = 0; i < yazarIds.Length; i++)
