@@ -12,7 +12,7 @@ namespace Kutuphane.Controllers
 {
     public class KategoriController : Controller
     {
-        dbLibrarySomeeEntities db = new dbLibrarySomeeEntities();
+        dbLibrarySomeeEntities1 db = new dbLibrarySomeeEntities1();
         public bool isInsert = false;
         public bool isDelete = false;
         public bool isUpdate = false;
@@ -122,11 +122,12 @@ namespace Kutuphane.Controllers
             var datas = db.Kategori.Where(x => x.ID == katID).SingleOrDefault();
             if (datas != null)
             {
-                if (datas.KitapKategorileri.Count != 0)
+                if (datas.Kitap.Count != 0)
                 {
                     isDelete = false;
                     return Json(data: new { success = 3, message = "KAYITLI KİTAP BULUNUYOR!", title = "SİLİNEMEZ" }, JsonRequestBehavior.AllowGet);
                 }
+
 
                 db.Kategori.Remove(datas);
                 db.SaveChanges();

@@ -12,7 +12,7 @@ namespace Kutuphane.Controllers
 {
     public class EmanetVerController : Controller
     {
-        dbLibrarySomeeEntities db = new dbLibrarySomeeEntities();
+        dbLibrarySomeeEntities1 db = new dbLibrarySomeeEntities1();
         private bool isInsert = false;
         private bool isUpdate = false;
         private bool isDelete = false;
@@ -279,6 +279,26 @@ namespace Kutuphane.Controllers
             catch (Exception e) { isUpdate = false; }
 
             return Json(data: new { success = 1, message = "BİR HATA OLDU!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Detail(int ID)
+        {
+            var data = db.ViewEmanetKitaplar.Where(item => item.ID == ID).Single();
+
+            ViewBag.teslim = "Teslim Edilmedi";
+            if (data.TeslimDurumu == true)
+            {
+                ViewBag.teslim = "Teslim Edildi";
+            }
+
+
+            if (data != null)
+            {
+                return View("Detail", data);
+            }
+
+            return View();
         }
     }
 }

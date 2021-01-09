@@ -5,7 +5,14 @@ select * from Kitap
 
 select * from EmanetKitaplar
 
-select * from ViewEmanetKitaplar
+select * from Kategori
+
+alter table Kitap
+alter column DeweyKod int
+
+
+
+
 
 create view ViewEmanetKitaplar
 AS

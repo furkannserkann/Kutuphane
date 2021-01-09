@@ -158,9 +158,6 @@
     <Compile Include="Models\Entity\Kitap.cs">
       <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\KitapKategorileri.cs">
-      <DependentUpon>someeModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Entity\KitapYazarlari.cs">
       <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
@@ -178,15 +175,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>someeModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>someeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity\sp_helpdiagrams_Result.cs">
-      <DependentUpon>someeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity\sysdiagrams.cs">
-      <DependentUpon>someeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Users.cs">
       <DependentUpon>someeModel.tt</DependentUpon>
@@ -270,6 +258,8 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <EntityDeploy Include="Models\Entity\someeModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>someeModel.Designer.cs</LastGenOutput>
@@ -277,8 +267,6 @@
     <Content Include="Models\Entity\someeModel.edmx.diagram">
       <DependentUpon>someeModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -334,6 +322,7 @@
     <Content Include="Views\EmanetVer\Index.cshtml" />
     <Content Include="Views\EmanetVer\Insert.cshtml" />
     <Content Include="Views\EmanetVer\Update.cshtml" />
+    <Content Include="Views\EmanetVer\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

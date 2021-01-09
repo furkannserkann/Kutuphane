@@ -12,7 +12,7 @@ namespace Kutuphane.Controllers
 {
     public class UserController : Controller
     {
-        dbLibrarySomeeEntities db = new dbLibrarySomeeEntities();
+        dbLibrarySomeeEntities1 db = new dbLibrarySomeeEntities1();
         private bool isInsert = false;
         private bool isUpdate = false;
         private bool isDelete = false;

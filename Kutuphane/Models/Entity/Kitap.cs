@@ -20,7 +20,6 @@ namespace Kutuphane.Models.Entity
         public Kitap()
         {
             this.EmanetKitaplar = new HashSet<EmanetKitaplar>();
-            this.KitapKategorileri = new HashSet<KitapKategorileri>();
             this.KitapYazarlari = new HashSet<KitapYazarlari>();
         }
 
@@ -48,17 +47,16 @@ namespace Kutuphane.Models.Entity
         public string CiltTipi { get; set; }
         public string Aciklama { get; set; }
         public Nullable<int> StokAdedi { get; set; }
-        public string DeweyKod { get; set; }
+        public Nullable<int> DeweyKod { get; set; }
         public Nullable<bool> EmaneteUygunmu { get; set; }
     
         public virtual Dil Dil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmanetKitaplar> EmanetKitaplar { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KitapKategorileri> KitapKategorileri { get; set; }
+        public virtual Kategori Kategori { get; set; }
+        public virtual YayinEvi YayinEvi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KitapYazarlari> KitapYazarlari { get; set; }
-        public virtual YayinEvi YayinEvi { get; set; }
 
         [NotMapped]
         public string[] filterDeweyIds { get; set; }

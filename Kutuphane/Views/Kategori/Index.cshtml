@@ -51,7 +51,7 @@
             <tr id="row_@item.ID">
                 <th scope="row" style="text-align:center;">@item.DeweyId</th>
                 <td>@item.Isim</td>
-                <td scope="row" style="text-align:center;">@item.KitapKategorileri.Count</td>
+                <td scope="row" style="text-align:center;">@item.Kitap.Count</td>
                 <td style="text-align:center;" class="tablebutton"><a href="/Kategori/Update/@item.ID" class="btn btn-success">Düzenle</a></td>
                 <td style="text-align:center;" class="tablebutton">
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="selectDeleteItem(@item.ID)">Sil</a>

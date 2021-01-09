@@ -39,7 +39,7 @@ namespace Kutuphane.Models.Entity
         public Nullable<bool> TeslimDurumu { get; set; }
         [DisplayName("HASAR YERÝ")]
         public string HasarYeri { get; set; }
-    
+
         public virtual Kitap Kitap { get; set; }
         public virtual Users Users { get; set; }
     }

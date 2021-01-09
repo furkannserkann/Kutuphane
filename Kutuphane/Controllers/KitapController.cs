@@ -12,7 +12,7 @@ namespace Kutuphane.Controllers
 {
     public class KitapController : Controller
     {
-        dbLibrarySomeeEntities db = new dbLibrarySomeeEntities();
+        dbLibrarySomeeEntities1 db = new dbLibrarySomeeEntities1();
         private bool isInsert = false;
         private bool isUpdate = false;
         private bool isDelete = false;
@@ -25,7 +25,7 @@ namespace Kutuphane.Controllers
                                             select new SelectListItem
                                             {
                                                 Text = i.DeweyId + " - " + i.Isim,
-                                                Value = i.DeweyId.ToString()
+                                                Value = i.ID.ToString()
                                             }).ToList();
             ViewBag.katList = katList;
 
@@ -66,18 +66,18 @@ namespace Kutuphane.Controllers
             if (string.IsNullOrEmpty(ISBN) && string.IsNullOrEmpty(Adi) && filterDeweyIds.Length == 0 &&
                 filterYazarIds.Length == 0 && filterYayineviIds.Length == 0 && filterDilIds.Length == 0)
             {
-                var dataList = db.Kitap.OrderBy(x => x.Adi).ToPagedList(page ?? 1, 5);
+                var dataList = db.Kitap.OrderBy(x => x.Adi).ToPagedList(page ?? 1, 10);
                 return View(dataList);
             }
 
             var dataListFilter = db.Kitap.Where(x => x.Adi.Contains(Adi) && x.ISBN.Contains(ISBN));
 
-            if (filterDeweyIds.Length > 0) dataListFilter = dataListFilter.Where(item => filterDeweyIds.Contains(item.DeweyKod));
+            if (filterDeweyIds.Length > 0) dataListFilter = dataListFilter.Where(item => filterDeweyIds.Equals(item.DeweyKod));
             if (filterYazarIds.Length > 0) dataListFilter = dataListFilter.Where(item => (item.KitapYazarlari.Where(x => x.KitapId == item.ID).Select(x => x.YazarId).Any(a => filterYazarIds.Any(y => y.ToString() == a.ToString()))));
             if (filterYayineviIds.Length > 0) dataListFilter = dataListFilter.Where(item => filterYayineviIds.Contains(item.YayinEviId.ToString()));
             if (filterDilIds.Length > 0) dataListFilter = dataListFilter.Where(item => filterDilIds.Contains(item.DilId.ToString()));
 
-            var mdataList = dataListFilter.OrderBy(x => x.Adi).ToPagedList(page ?? 1, 5);
+            var mdataList = dataListFilter.OrderBy(x => x.Adi).ToPagedList(page ?? 1, 10);
 
             return View(mdataList);
         }
@@ -90,7 +90,7 @@ namespace Kutuphane.Controllers
                                             select new SelectListItem
                                             {
                                                 Text = i.DeweyId + " - " + i.Isim,
-                                                Value = i.DeweyId.ToString()
+                                                Value = i.ID.ToString()
                                             }).ToList();
             ViewBag.katList = katList;
 
@@ -233,7 +233,7 @@ namespace Kutuphane.Controllers
                                             select new SelectListItem
                                             {
                                                 Text = i.DeweyId + " - " + i.Isim,
-                                                Value = i.DeweyId.ToString()
+                                                Value = i.ID.ToString()
                                             }).ToList();
             ViewBag.katList = katList;
 
@@ -453,7 +453,7 @@ namespace Kutuphane.Controllers
             }
 
             Kategori kategori = (from kat in db.Kategori
-                                 join kit in db.Kitap on kat.DeweyId equals kit.DeweyKod
+                                 join kit in db.Kitap on kat.ID equals kit.DeweyKod
                                  where kit.ID == ID
                                  select kat).Single();
 
@@ -464,6 +464,13 @@ namespace Kutuphane.Controllers
 
 
             var data = db.Kitap.Where(item => item.ID == ID).Single();
+
+            ViewBag.emaneteUygunmu = "Uygun Değil";
+            if (data.EmaneteUygunmu == true)
+            {
+                ViewBag.emaneteUygunmu = "Uygun";
+            }
+
             if (data != null)
             {
                 return View("Detail", data);

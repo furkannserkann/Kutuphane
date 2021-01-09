@@ -17,7 +17,7 @@ namespace Kutuphane.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Kategori()
         {
-            this.KitapKategorileri = new HashSet<KitapKategorileri>();
+            this.Kitap = new HashSet<Kitap>();
         }
     
         public int ID { get; set; }
@@ -25,6 +25,6 @@ namespace Kutuphane.Models.Entity
         public string Isim { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KitapKategorileri> KitapKategorileri { get; set; }
+        public virtual ICollection<Kitap> Kitap { get; set; }
     }
 }
